@@ -8,7 +8,8 @@ import DropdownContext from '../../contexts/DropdownContext';
 import CardIcon from '../../components/card-icon/CardIcon';
 import CardDropdown from '../../components/card-dropdown/CardDropdown';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
-import './navigation.styles.scss';
+
+import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from './navigation.styles.jsx';
 
 
 
@@ -19,25 +20,25 @@ const Navigation = () => {
 
     return (
         <>
-            <div className='navigation'>
-                <Link to='/' className='logo-container'>
+            <NavigationContainer>
+                <LogoContainer to='/' >
                     <Logo className='logo' />
-                </Link>
-                <div className='nav-links-container'>
-                    <Link to='/shop' className='nav-link'>SHOP</Link>
+                </LogoContainer>
+                <NavLinksContainer>
+                    <NavLink to='/shop' >SHOP</NavLink>
                     {currentUser ? (
-                        <span
+                        <NavLink
+                        as='span'
                             onClick={signOutAuthUser}
-                            className='nav-link'
                         >
                             SIGN OUT
-                        </span>)
-                        : (<Link to='/auth' className='nav-link'>SIGN IN </Link>
+                        </NavLink>)
+                        : (<NavLink to='/auth'>SIGN IN </NavLink>
                         )}
                     <CardIcon />
-                </div>
+                </NavLinksContainer>
                 {isOpen && <CardDropdown/> }
-            </div>
+            </NavigationContainer>
             <Outlet />
         </>
     )

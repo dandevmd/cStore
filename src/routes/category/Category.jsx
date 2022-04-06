@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import CategoriesContext from '../../contexts/CategoriesContext'
 
 import ProductCard from '../../components/product-card/ProductCard'
-import './category.styles.scss'
+import { CategoryTitle, CategoryCont } from './category.styles.jsx'
 
 const Category = () => {
     const { dynamicRoute } = useParams()
@@ -18,12 +18,12 @@ const Category = () => {
 
     return (
         <>
-            <h2 className="category__title">{dynamicRoute}</h2>
-            <div className="category__container">
+            <CategoryTitle>{dynamicRoute}</CategoryTitle>
+            <CategoryCont>
                 {showProducts && showProducts.map(product => (
                     <ProductCard key={product.id} product={product} />
                 ))}
-            </div>
+            </CategoryCont>
         </>
     )
 }

@@ -6,9 +6,9 @@ import {
 } from '../../database/firebase.config.js'
 
 import FormInput from '../form-input/FormInput.jsx'
-import Button from '../button/Button.jsx'
+import Button, {BUTTON_TYPE_CLASSES} from '../button/Button.jsx'
 
-import './signin.styles.scss'
+import { SignInContainer, ButtonsContainer } from './signin.styles'
 
 
 const defaultFormFields = {
@@ -55,7 +55,7 @@ const SignIn = () => {
 
     // console.log(formFields)
     return (
-        <div className='sign-up-container'>
+        <SignInContainer>
             <h2>Do you have an account already?</h2>
             <span>Sign In with Email and Password</span>
             <form onSubmit={onSubmit}>
@@ -64,12 +64,12 @@ const SignIn = () => {
 
                 <FormInput label={'Password'} onChange={onChange} name='password' value={password} type="password" required />
 
-                <div className="buttons-container">
+                <ButtonsContainer>
                     <Button type="submit">Sign In</Button>
-                    <Button type='button' buttonType='google' onClick={signInWithGoogle}>Sign In with Google</Button>
-                </div>
+                    <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>Sign In with Google</Button>
+                </ButtonsContainer>
             </form>
-        </div>
+        </SignInContainer>
     )
 }
 

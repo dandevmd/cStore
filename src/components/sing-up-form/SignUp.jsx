@@ -4,7 +4,7 @@ import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '
 import FormInput from '../form-input/FormInput.jsx'
 import Button from '../button/Button.jsx'
 
-import './signup.styles.scss'
+import { SignUpContainer} from './signup.styles'
 
 
 const defaultFormFields = {
@@ -55,7 +55,7 @@ const SignUp = () => {
 
     // console.log(formFields)
     return (
-        <div className='sign-up-container'>
+        <SignUpContainer>
             <h2>Dont have an account?</h2>
             <span>Sign In with Email and Password</span>
             <form onSubmit={onSubmit}>
@@ -69,7 +69,7 @@ const SignUp = () => {
 
                 <Button type="submit">Register</Button>
             </form>
-        </div>
+        </SignUpContainer>
     )
 }
 
