@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { signOutAuthUser } from '../../database/firebase.config'
 
 import UserContext from '../../contexts/UserContext'
@@ -15,7 +15,11 @@ import './navigation.styles.scss';
 const Navigation = () => {
     const { currentUser } = useContext(UserContext)
     const { isOpen } = useContext(DropdownContext)
+    const navigate= useNavigate()
 
+    const handleSignOut = () => {
+        signOutAuthUser()
+        navigate('/auth')}
 
     return (
         <>
@@ -27,7 +31,7 @@ const Navigation = () => {
                     <Link to='/shop' className='nav-link'>SHOP</Link>
                     {currentUser ? (
                         <span
-                            onClick={signOutAuthUser}
+                            onClick={handleSignOut}
                             className='nav-link'
                         >
                             SIGN OUT
