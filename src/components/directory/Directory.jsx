@@ -1,9 +1,9 @@
 import CategoryItem from '../category-item/CategoryItem';
-
+import {categories} from '../../constants/categories';
 import './directory.styles.scss';
 
 
-const Directory = ({categories}) => {
+const Directory = () => {
   return (
       <div className='directory-container'>
           {categories.map((category) => (
