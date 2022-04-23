@@ -4,6 +4,7 @@ export const CategoryTitle = styled.h2`
 font-size: 28px;
 margin-bottom: 25px;
 text-align: center;
+text-transform: uppercase;
 `
 export const CategoryCont = styled.div`
 display: grid;

@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {useContext, useEffect} from 'react'
 
 import DropdownContext from '../../contexts/DropdownContext'
 
@@ -7,10 +7,13 @@ import { CartIconContainer, ItemCount, } from'./cardIcon.styles.jsx'
 
 
 const CardIcon = () => {
-    const {isOpen, setIsOpen, cartCount} = useContext(DropdownContext)
+    const { isOpen, setIsOpen, cartCount} = useContext(DropdownContext)
+
+    const toggleDropdown = ()=> setIsOpen(!isOpen)
+   
 
     return (
-        <CartIconContainer onClick={() => setIsOpen(!isOpen)}>
+        <CartIconContainer onClick={toggleDropdown}>
             <ShoppingIcon  />
             <ItemCount >{cartCount}</ItemCount>
         </CartIconContainer>

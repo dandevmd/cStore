@@ -1,8 +1,10 @@
 import { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { signOutAuthUser } from '../../database/firebase.config'
 
-import UserContext from '../../contexts/UserContext'
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../redux/selectors/userSelector'
+
 import DropdownContext from '../../contexts/DropdownContext';
 
 import CardIcon from '../../components/card-icon/CardIcon';
@@ -14,7 +16,7 @@ import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from '
 
 
 const Navigation = () => {
-    const { currentUser } = useContext(UserContext)
+    const { currentUser } = useSelector(state => state.user);
     const { isOpen } = useContext(DropdownContext)
 
 

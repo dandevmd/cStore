@@ -25,4 +25,7 @@ justify-content: flex-end;
 
 export const NavLink = styled(Link)`
 padding: 10px 15px;
+outline: none;
+text-decoration: none;
+color:#000;
 cursor: pointer;`
