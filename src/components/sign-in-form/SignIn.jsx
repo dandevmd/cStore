@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
     signInWithGooglePopup,
-    createUserDocumentFromAuth,
     signInAuthUserWithEmailAndPassword
 } from '../../database/firebase.config.js'
 
@@ -19,7 +19,15 @@ const defaultFormFields = {
 const SignIn = () => {
     const [formFields, setFormFields] = useState(defaultFormFields)
     const { email, password } = formFields
+    const navigate = useNavigate()
 
+    const resetFormFields = () => {
+        setFormFields(defaultFormFields);
+    };
+
+    const signInWithGoogle = async () => {
+        await signInWithGooglePopup()
+    }
 
     const onChange = (e) => {
         //const {id, value} = e.target    se poate si cu atributu name inloc de id
@@ -32,26 +40,19 @@ const SignIn = () => {
         ))
     }
 
-    const signInWithGoogle = async () => {
-        await signInWithGooglePopup()
-    }
-
-
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { user } = await signInAuthUserWithEmailAndPassword(email, password)
-            setFormFields(defaultFormFields)
+             await signInAuthUserWithEmailAndPassword(email, password)
+             navigate('/shop')
+            resetFormFields()
 
         } catch (error) {
-            if (error.code === 'auth/user-not-found' && error.code === 'auth/wrong-password') {
-                alert('Wrong user credentials')
+            if (error.code === 'auth/user-not-found' && error.code === 'auth/wrong-password') alert('Wrong user credentials')
 
-            } else {
-                console.log(error)
-            }
-        }
-    }
+          
+        
+    }}
 
     // console.log(formFields)
     return (

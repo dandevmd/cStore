@@ -24,7 +24,7 @@ const dispatch = useDispatch();
 
       }
 
-      setCurrentUser(user)
+      dispatch(setCurrentUser(user))
       console.log(user)
     })
     return unsubscribe

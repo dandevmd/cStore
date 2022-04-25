@@ -1,11 +1,9 @@
-import { useContext } from 'react';
-import { Outlet } from 'react-router-dom'
-import { signOutAuthUser } from '../../database/firebase.config'
-
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../redux/selectors/userSelector'
 
-import DropdownContext from '../../contexts/DropdownContext';
+import { signOutAuthUser } from '../../database/firebase.config'
+import { selectCurrentUser } from '../../redux/selectors/userSelector';
+import { selectIsOpenState } from '../../redux/selectors/cartSelector';
 
 import CardIcon from '../../components/card-icon/CardIcon';
 import CardDropdown from '../../components/card-dropdown/CardDropdown';
@@ -16,9 +14,14 @@ import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from '
 
 
 const Navigation = () => {
-    const { currentUser } = useSelector(state => state.user);
-    const { isOpen } = useContext(DropdownContext)
+    const currentUser = useSelector(selectCurrentUser);
+    const isOpen = useSelector(selectIsOpenState);
+    const navigate = useNavigate();
 
+    const handleSignOut = () => {
+        signOutAuthUser()
+        navigate('/auth')
+    }
 
     return (
         <>
@@ -28,18 +31,22 @@ const Navigation = () => {
                 </LogoContainer>
                 <NavLinksContainer>
                     <NavLink to='/shop' >SHOP</NavLink>
-                    {currentUser ? (
-                        <NavLink
-                        as='span'
-                            onClick={signOutAuthUser}
-                        >
-                            SIGN OUT
-                        </NavLink>)
-                        : (<NavLink to='/auth'>SIGN IN </NavLink>
-                        )}
+                    {
+                        !currentUser ? (<NavLink to='/auth'>SIGN IN </NavLink>
+                        )
+                            : (
+                                <NavLink
+                                    as='span'
+                                    onClick={handleSignOut}
+                                >
+                                    SIGN OUT
+                                </NavLink>
+                            )
+
+                    }
                     <CardIcon />
                 </NavLinksContainer>
-                {isOpen && <CardDropdown/> }
+                {isOpen && <CardDropdown />}
             </NavigationContainer>
             <Outlet />
         </>
