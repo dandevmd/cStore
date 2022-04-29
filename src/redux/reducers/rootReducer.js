@@ -4,10 +4,8 @@ import { categoryReducer } from "./categoryReducer/categoryReducer";
 import { cartReducer } from "./cartReducer/cartReducer";
 
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     user: userReducer,
     categories: categoryReducer,
     cart: cartReducer
 })
-
-export default rootReducer

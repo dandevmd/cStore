@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 
-import { getCollectionWithDocuments } from "../../database/firebase.config";
-import {setCategories} from '../../redux/actions/categories/categoryActionCreator'
+
+import { fetchCategoriesAsync } from  '../../redux/actions/categories/categoryActionCreator'
 
 import CategoriesPreview from '../categoriesPreview/CategoriesPreview'
 import Category from '../category/Category'
@@ -13,12 +13,10 @@ const Shop = () => {
 const dispatch = useDispatch();
 
   useEffect(() => {
-    const asyncWrapper = async () => {
-      const categoriesArray = await getCollectionWithDocuments('categories')
-      dispatch(setCategories(categoriesArray))
-    }
-    asyncWrapper()
+    dispatch((fetchCategoriesAsync()))
+
   }, [])
+  
 
   return (
     <Routes>
