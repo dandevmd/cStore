@@ -5,7 +5,7 @@ import logger from 'redux-logger';
 import { rootReducer } from '../reducers/rootReducer';
 import thunk from 'redux-thunk'
 
-const middleWares = [process.env.NODE_ENV === 'development' && logger, thunk, ].filter(Boolean);
+const middleWares = [process.env.NODE_ENV === 'development' && thunk, logger].filter(Boolean);
 
 const composeEnhancers = (process.env.NODE_ENV !== 'production' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 

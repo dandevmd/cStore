@@ -9,18 +9,14 @@ const {
     FETCH_CATEGORIES_FAILED
 } = CATEGORIES_ACTION_TYPE
 
-export const fetchCategoriesStart = () => {
-    createActions(FETCH_CATEGORIES_START)
-}
-export const fetchCategoriesSuccess = (categoriesArray) => {
-    createActions(FETCH_CATEGORIES_SUCCESS, categoriesArray)
-}
-export const fetchCategoriesFailed = (error) => {
-    createActions(FETCH_CATEGORIES_FAILED, error)
-}
+export const fetchCategoriesStart = () => createActions(FETCH_CATEGORIES_START)
+
+export const fetchCategoriesSuccess = (categoriesArray) => createActions(FETCH_CATEGORIES_SUCCESS, categoriesArray)
+
+export const fetchCategoriesFailed = (error) => createActions(FETCH_CATEGORIES_FAILED, error)
 
 export const fetchCategoriesAsync = () => async(dispatch) => {
-    dispatch(fetchCategoriesStart())
+    (dispatch(fetchCategoriesStart()))
 
     try {
         const categoriesArray = await getCollectionWithDocuments('categories');
@@ -28,5 +24,7 @@ export const fetchCategoriesAsync = () => async(dispatch) => {
     } catch (error) {
         dispatch(fetchCategoriesFailed(error))
     }
+
+
 
 }
