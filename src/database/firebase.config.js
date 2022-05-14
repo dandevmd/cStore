@@ -45,6 +45,16 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 // Initialize Firestore
 export const db = getFirestore()
 
+// get the conllection created with all docs
+export const getCollectionWithDocuments = async() => {
+    const collectionRef = collection(db, 'categories')
+    const q = query(collectionRef)
+    const querySnapShot = await getDocs(q)
+
+    return querySnapShot.docs.map(docSnapshot => docSnapshot.data())
+
+}
+
 //Create a user document 
 export const createUserDocumentFromAuth = async(userAuth, additionalInformation = {}) => {
     if (!userAuth) return;
@@ -53,13 +63,13 @@ export const createUserDocumentFromAuth = async(userAuth, additionalInformation 
 
     // console.log('userRef>>', userDocRef)
 
-    const snapShot = await getDoc(userDocRef)
+    const userSnapshot = await getDoc(userDocRef)
         // console.log('just snapshot>>>', snapShot)
         // console.log('if shot exist>>', snapShot.exists())
 
-    if (!snapShot.exists()) {
+    if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth
-        const createdAt = new Date()
+        const createdAt = new Date();
 
         try {
             await setDoc(userDocRef, {
@@ -73,7 +83,7 @@ export const createUserDocumentFromAuth = async(userAuth, additionalInformation 
             console.log("error creating user", error.message)
         }
     }
-    return userDocRef;
+    return userSnapshot;
 
 }
 
@@ -110,12 +120,17 @@ export const createCollectionWithDocuments = async(collectionName, objectsToAdd)
     console.log('collection created')
 }
 
-// get the conllection created with all docs
-export const getCollectionWithDocuments = async() => {
-    const collectionRef = collection(db, 'categories')
-    const q = query(collectionRef)
-    const querySnapShot = await getDocs(q)
 
-    return querySnapShot.docs.map(docSnapshot => docSnapshot.data())
 
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(
+            auth,
+            (userAuth) => {
+                unsubscribe();
+                resolve(userAuth);
+                // console.log(userAuth)
+            },
+            reject)
+    })
 }

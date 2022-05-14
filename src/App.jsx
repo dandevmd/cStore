@@ -1,10 +1,7 @@
 import {  useEffect } from 'react';
-import { onAuthObserver } from './database/firebase.config';
-import { createUserDocumentFromAuth } from './database/firebase.config';
 import { Routes, Route } from 'react-router';
 import {useDispatch} from 'react-redux';
-
-import {setCurrentUser} from './redux/actions/user/userActionCreator.js'
+import { checkUserSession } from './redux/actions/user/userActionCreator';
 
 import Home from './routes/home/Home';
 import Authentication from './routes/authentication/Authentication';
@@ -18,16 +15,7 @@ function App() {
 const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthObserver(user => {
-      if (user) {
-        createUserDocumentFromAuth(user)
-
-      }
-
-      dispatch(setCurrentUser(user))
-      console.log(user)
-    })
-    return unsubscribe
+    dispatch(checkUserSession())
   }, [])
 
   return (

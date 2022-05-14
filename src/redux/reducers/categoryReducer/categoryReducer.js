@@ -17,14 +17,14 @@ export const categoryReducer = (state = CATEGORIES_INITIAL_STATE, action = {}) =
         case CATEGORIES_ACTION_TYPE.FETCH_CATEGORIES_SUCCESS:
             return {
                 ...state,
-                categories: action.payload,
                 isLoading: false,
+                categories: action.payload,
             }
         case CATEGORIES_ACTION_TYPE.FETCH_CATEGORIES_FAILED:
             return {
                 ...state,
-                error: action.payload,
                 isLoading: false,
+                error: action.payload,
             }
         default:
             return state

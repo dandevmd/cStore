@@ -1,9 +1,9 @@
-import { useEffect, useState, useLayoutEffect } from 'react'
+import { useEffect,} from 'react'
 import {Routes, Route} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 
 
-import { fetchCategoriesAsync } from  '../../redux/actions/categories/categoryActionCreator'
+import { fetchCategoriesStart } from  '../../redux/actions/categories/categoryActionCreator'
 
 import CategoriesPreview from '../categoriesPreview/CategoriesPreview'
 import Category from '../category/Category'
@@ -12,8 +12,8 @@ import Category from '../category/Category'
 const Shop = () => {
 const dispatch = useDispatch();
 
-  useLayoutEffect(() => {
-   dispatch(fetchCategoriesAsync())
+  useEffect(() => {
+    dispatch(fetchCategoriesStart())
 
   },[])
   

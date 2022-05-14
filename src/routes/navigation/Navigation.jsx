@@ -1,9 +1,9 @@
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 
-import { signOutAuthUser } from '../../database/firebase.config'
 import { selectCurrentUser } from '../../redux/selectors/userSelector';
 import { selectIsOpenState } from '../../redux/selectors/cartSelector';
+import { signOutStart } from '../../redux/actions/user/userActionCreator';
 
 import CardIcon from '../../components/card-icon/CardIcon';
 import CardDropdown from '../../components/card-dropdown/CardDropdown';
@@ -17,11 +17,14 @@ const Navigation = () => {
     const currentUser = useSelector(selectCurrentUser);
     const isOpen = useSelector(selectIsOpenState);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSignOut = () => {
-        signOutAuthUser()
+       dispatch(signOutStart())
         navigate('/auth')
     }
+
+    console.log('currentUser>>>>>>>>>>', currentUser)
 
     return (
         <>
