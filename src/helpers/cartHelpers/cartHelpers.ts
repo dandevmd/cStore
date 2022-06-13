@@ -1,4 +1,9 @@
-export const addCartItem = (cartItems, productToAdd) => {
+import {  CategoryItem } from '../../redux/actions/categories/categoryActionType';
+import { CartItem } from '../../redux/actions/cart/cartActionType';
+
+
+
+export const addCartItem = (cartItems:CartItem[], productToAdd:CategoryItem):CartItem[] => {
     const existingCartItem = cartItems.find(
         cartItem => cartItem.id === productToAdd.id
     );
@@ -14,10 +19,10 @@ export const addCartItem = (cartItems, productToAdd) => {
 
 }
 
-export const removeCartItem = (cartItems, cartItemToRemove) => {
+export const removeCartItem = (cartItems:CartItem[], cartItemToRemove:CartItem):CartItem[] => {
     const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToRemove.id);
 
-    if (existingCartItem.quantity === 1) {
+    if (existingCartItem && existingCartItem.quantity === 1) {
         return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
     } else {
         return cartItems.map(cartItem =>
@@ -27,11 +32,13 @@ export const removeCartItem = (cartItems, cartItemToRemove) => {
     }
 }
 
-export const clearCartItem = (cartItems, cartItemToClear) => {
+export const clearCartItem = (cartItems:CartItem[], cartItemToClear:CartItem):CartItem[] => {
     return cartItems.filter(cartItem => cartItem.id !== cartItemToClear.id);
 }
 
-export const totalQuantity = (cartItems) => {
+
+
+export const totalQuantity = (cartItems:CartItem[]) => {
     return cartItems.reduce((accumulatedQuantity, cartItem) => {
         return accumulatedQuantity + cartItem.quantity;
     }, 0);
