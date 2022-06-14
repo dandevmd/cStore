@@ -3,8 +3,8 @@ import {useSelector} from 'react-redux';
 import { PaymentButton } from './paymentForm.styles';
 
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import {selectCartItemsTotal} from '../../redux/selectors/cartSelector.js';
-import {selectCurrentUser} from '../../redux/selectors/userSelector.js';
+import {selectCartItemsTotal} from '../../redux/selectors/cartSelector';
+import {selectCurrentUser} from '../../redux/selectors/userSelector';
 
 import Button, { BUTTON_TYPE_CLASSES } from '../button/Button';
 import { PaymentFormContainer, FormContainer } from './paymentForm.styles';

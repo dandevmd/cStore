@@ -1,8 +1,8 @@
 import {useDispatch, useSelector} from 'react-redux'
 import { selectCartItemsState } from '../../redux/selectors/cartSelector'
-import { addItemToTheCart } from '../../redux/actions/cart/cartActionCreator.js'
+import { addItemToTheCart } from '../../redux/actions/cart/cartActionCreator'
 
-import Button, { BUTTON_TYPE_CLASSES } from '../button/Button.jsx'
+import Button, { BUTTON_TYPE_CLASSES } from '../button/Button'
 import { ProductCardContainer, Name, Footer, Price } from './productCard.styles'
 
 const ProductCard = ({ product }) => {

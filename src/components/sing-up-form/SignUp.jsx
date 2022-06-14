@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../database/firebase.config.js'
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../database/firebase.config'
 import { useDispatch } from 'react-redux'
 import { signUpStart } from '../../redux/actions/user/userActionCreator'
 
