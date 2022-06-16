@@ -1,11 +1,17 @@
+import {FC} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { selectCartItemsState } from '../../redux/selectors/cartSelector'
 import { addItemToTheCart } from '../../redux/actions/cart/cartActionCreator'
+import {CartItem} from '../../redux/actions/cart/cartActionType'
 
 import Button, { BUTTON_TYPE_CLASSES } from '../button/Button'
 import { ProductCardContainer, Name, Footer, Price } from './productCard.styles'
 
-const ProductCard = ({ product }) => {
+type ProductCardProps = {
+  product:CartItem
+}
+
+const ProductCard: FC<ProductCardProps> = ({ product }):JSX.Element => {
   const { name, price, imageUrl } = product
   const dispatch = useDispatch()
   const cartItems = useSelector(selectCartItemsState)

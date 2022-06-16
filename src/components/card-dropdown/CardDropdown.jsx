@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import  { useEffect, useRef, FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCartItemsState, selectIsOpenState } from '../../redux/selectors/cartSelector';
@@ -6,9 +6,9 @@ import { setIsCartOpen } from '../../redux/actions/cart/cartActionCreator';
 
 import Button from '../button/Button'
 import CartItem from '../cart-item/CartItem'
-import { CartDropdownContainer, CartItemsContainer, EmptyMessage } from './cardDropdown.styles.jsx'
+import { CartDropdownContainer, CartItemsContainer, EmptyMessage } from './cardDropdown.styles.js'
 
-const CardDropdown = () => {
+const CardDropdown= () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const ref = useRef()
@@ -21,7 +21,7 @@ const CardDropdown = () => {
   }
 
   useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
 
       if (isOpen && ref.current && !ref.current.contains(e.target)) {
         dispatch(setIsCartOpen(false))

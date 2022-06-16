@@ -1,6 +1,6 @@
-import {  useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { Routes, Route } from 'react-router';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { checkUserSession } from './redux/actions/user/userActionCreator';
 
 import Home from './routes/home/Home';
@@ -11,8 +11,8 @@ import Checkout from './routes/checkout/Checkout';
 
 
 
-function App() {
-const dispatch = useDispatch();
+const App: FC = ():JSX.Element => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(checkUserSession())

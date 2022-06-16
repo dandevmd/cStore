@@ -24,7 +24,6 @@ const Navigation = () => {
         navigate('/auth')
     }
 
-    console.log('currentUser>>>>>>>>>>', currentUser)
 
     return (
         <>

@@ -1,6 +1,8 @@
+import {FC} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCartItemsState } from '../../redux/selectors/cartSelector'
 import { clearItemFromCart, removeItemFromCart, addItemToTheCart } from '../../redux/actions/cart/cartActionCreator'
+import {CartItem } from '../../redux/actions/cart/cartActionType'
 
 import {
     CheckoutItemContainer,
@@ -10,10 +12,13 @@ import {
     Value,
     Quantity,
     RemoveButton
-} from './checkoutItem.styles.jsx'
+} from './checkoutItem.styles.js'
 
-const CheckoutItem = ({ cartItem }) => {
-    const { name, imageUrl, quantity, price } = cartItem
+type CheckoutItemProps = {
+    cartItem: CartItem
+};
+
+const CheckoutItem:FC<CheckoutItemProps> = ({ cartItem }):JSX.Element => {
     const dispatch = useDispatch()
     const cartItems = useSelector(selectCartItemsState)
 
@@ -26,15 +31,15 @@ const CheckoutItem = ({ cartItem }) => {
     return (
         <CheckoutItemContainer>
             <ImageContainer>
-                <img src={imageUrl} alt={`${name}`} />
+                <img src={cartItem.imageUrl} alt={`${cartItem.name}`} />
             </ImageContainer>
-            <BaseSpan>{name}</BaseSpan>
+            <BaseSpan>{cartItem.name}</BaseSpan>
             <Quantity>
                 <Arrow onClick={removeItemHandler}>&#10094;</Arrow>
-                <Value>{quantity}</Value>
+                <Value>{cartItem.quantity}</Value>
                 <Arrow onClick={addItemHandler}>&#10095;</Arrow>
             </Quantity>
-            <BaseSpan>{price}</BaseSpan>
+            <BaseSpan>{cartItem.price}</BaseSpan>
             <RemoveButton
                 onClick={clearItemHandler}
                 className="remove-button"

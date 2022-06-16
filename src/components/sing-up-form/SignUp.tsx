@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../database/firebase.config'
+import { useState,ChangeEvent,FormEvent } from 'react'
+import { AuthErrorCodes, AuthError } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { signUpStart } from '../../redux/actions/user/userActionCreator'
 
-import FormInput from '../form-input/FormInput.jsx'
-import Button from '../button/Button.jsx'
+import FormInput from '../form-input/FormInput.js'
+import Button from '../button/Button.js'
 
 import { SignUpContainer} from './signup.styles'
 
@@ -22,7 +22,7 @@ const SignUp = () => {
     const dispatch= useDispatch()
 
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (password !== confirmPassword) {
             alert('Passwords do not match')
@@ -34,7 +34,7 @@ const SignUp = () => {
             setFormFields(defaultFormFields)
 
         } catch (error) {
-            if (error.code === 'auth/email-already-in-use') {
+            if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
                 alert('Email already in use')
             } else {
                 console.log('error>>', error)
@@ -42,7 +42,7 @@ const SignUp = () => {
         }
     }
 
-    const onChange = (e) => {
+    const onChange = (e:ChangeEvent<HTMLInputElement>) => {
         //const {id, value} = e.target    se poate si cu atributu id inloc de name
         setFormFields(prevState => (
             {

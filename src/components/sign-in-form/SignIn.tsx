@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import { useState, FormEvent, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 
 import { googleSignInStart, emailSignInStart } from'../../redux/actions/user/userActionCreator'
 
-import FormInput from '../form-input/FormInput.jsx'
-import Button, {BUTTON_TYPE_CLASSES} from '../button/Button.jsx'
+import FormInput from '../form-input/FormInput.js'
+import Button, {BUTTON_TYPE_CLASSES} from '../button/Button.js'
 
 import { SignInContainer, ButtonsContainer } from './signin.styles'
 
@@ -30,7 +30,7 @@ const SignIn = () => {
         dispatch(googleSignInStart())
     }
 
-    const onChange = (e) => {
+    const onChange = (e:ChangeEvent<HTMLInputElement>) => {
         //const {id, value} = e.target    se poate si cu atributu name inloc de id
         setFormFields(prevState => (
             {
@@ -41,7 +41,7 @@ const SignIn = () => {
         ))
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
@@ -50,13 +50,10 @@ const SignIn = () => {
             resetFormFields()
 
         } catch (error) {
-            if (error.code === 'auth/user-not-found' && error.code === 'auth/wrong-password') alert('Wrong user credentials')
-
-          
-        
+            console.log('User sign-in Failed',error as Error)   
     }}
 
-    // console.log(formFields)
+
     return (
         <SignInContainer>
             <h2>Do you have an account already?</h2>

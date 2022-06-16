@@ -1,10 +1,15 @@
-import React from 'react'
-
+import {FC} from 'react'
+import {CartItem} from '../../redux/actions/cart/cartActionType'
 import ProductCard from '../product-card/ProductCard'
-import { CategoryPreviewContainer, Title, Preview } from './categoryPreview.styles.jsx'
+import { CategoryPreviewContainer, Title, Preview } from './categoryPreview.styles.js'
 
 
-const CategoryPreview = ({ title, products }) => {
+type CategoryPreviewProps = {
+  title: string,
+  products: CartItem[],
+}
+
+const CategoryPreview:FC<CategoryPreviewProps> = ({ title, products }):JSX.Element => {
 
   return (
     <CategoryPreviewContainer>

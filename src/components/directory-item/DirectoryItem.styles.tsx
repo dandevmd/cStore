@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
+type BackgroundImageProps = {
+  imageUrl:string
+}
+
 export const BackgroundImage = styled.div`
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+  background-image: ${({ imageUrl }: BackgroundImageProps) => `url(${imageUrl})`};
 `;
 
 export const Body = styled.div`

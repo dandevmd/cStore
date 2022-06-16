@@ -1,7 +1,13 @@
-import React from 'react'
+import {FC} from 'react'
+import {CartItem as TcartItem} from '../../redux/actions/cart/cartActionType'
+
 import { CartIconContainer, Name, ItemDetails } from './cartItem.styles.jsx'
 
-const CartItem = ({ cartItem }) => {
+type CartItemProps = {
+  cartItem: TcartItem
+}
+
+const CartItem:FC<CartItemProps> = ({ cartItem }):JSX.Element => {
   const { name, imageUrl, price, quantity } = cartItem
 
   return (
